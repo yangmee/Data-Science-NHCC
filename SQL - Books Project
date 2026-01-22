@@ -1,0 +1,129 @@
+BookAuthors
+author_id INT FOREIGN KEY REFERENCES Authors(author_id) ON DELETE CASCADE
+book_id INT FOREIGN KEY REFERENCES Books(book_id) ON DELETE CASCADE
+PRIMARY KEY (author_id, book_id)
+BookGenres
+book_id INT FOREIGN KEY REFERENCES Books(book_id) ON DELETE CASCADE
+genre_id INT FOREIGN KEY REFERENCES Genres(genre_id) ON DELETE CASCADE 
+PRIMARY KEY (book_id, genre_id)
+
+CREATE DATABASE library_project; 
+
+CREATE TABLE Authors (
+author_id INT AUTO_INCREMENT PRIMARY KEY,
+first_name VARCHAR (100) NOT NULL,
+last_name VARCHAR (100) NOT NULL, 
+birth_year INT, 
+nationality VARCHAR (100) 
+);
+
+CREATE TABLE Genres ( 
+genre_id INT AUTO_INCREMENT PRIMARY KEY, 
+genre_name VARCHAR(100) NOT NULL UNIQUE 
+);
+CREATE TABLE Publishers (
+publisher_id INT AUTO_INCREMENT PRIMARY KEY,
+publisher_name VARCHAR(255) NOT NULL,
+location VARCHAR(255)
+);
+
+CREATE TABLE Books ( 
+book_id INT AUTO_INCREMENT PRIMARY KEY, 
+title VARCHAR(500) NOT NULL, 
+isbn VARCHAR(20) UNIQUE, 
+publication_year INT, 
+publisher_id INT, 
+FOREIGN KEY (publisher_id) REFERENCES Publishers(publisher_id) ON DELETE SET NULL );
+
+CREATE TABLE BookAuthors (
+author_id INT,
+book_id INT,
+PRIMARY KEY (author_id, book_id), 
+FOREIGN KEY (author_id) REFERENCES Authors(author_id) ON DELETE CASCADE,
+FOREIGN KEY (book_id) REFERENCES Books(book_id) ON DELETE CASCADE
+);
+
+CREATE TABLE BookGenres ( 
+book_id INT, 
+genre_id INT, 
+PRIMARY KEY (book_id, genre_id), 
+FOREIGN KEY (book_id) REFERENCES Books(book_id) ON DELETE CASCADE, 
+FOREIGN KEY (genre_id) REFERENCES Genres(genre_id) ON DELETE CASCADE 
+);
+INSERT INTO Authors (author_id, first_name, last_name, birth_year, nationality) 
+VALUES
+(1, 'George', 'Orwell', 1903, 'British'),
+(2, 'Jane', 'Austen', 1775, 'British'),
+(3, 'Mark', 'Twain', 1835, 'American'),
+(4, 'Haruki', 'Murakami', 1949, 'Japanese'),
+(5, 'J.K.', 'Rowling', 1965, 'British'),
+(6, 'Agatha', 'Christie', 1890, 'British'),
+(7, 'Ernest', 'Hemingway', 1899, 'American'),
+(8, 'F. Scott', 'Fitzgerald', 1896, 'American'),
+(9, 'Leo', 'Tolstoy', 1928, 'Russian'),
+(10, 'Gabriel', 'Garcia Marquez', 1927, 'Colombian');
+
+INSERT INTO Genres (genre_id, genre_name)
+VALUES
+(1, 'Fiction'),
+(2, 'Mystery'),
+(3, 'Fantasy'),
+(4, 'Historical'),
+(5, 'Science Fiction'),
+(6, 'Romance'),
+(7, 'Adventure'),
+(8, 'Drama'),
+(9, 'Satire'),
+(10, 'Horror');
+
+INSERT INTO Publishers (publisher_id, publisher_name, location)
+VALUES
+(1, 'Penguin Books', 'London, UK'),
+(2, 'HarperCollins', 'New York, USA'),
+(3, 'Random House', 'Berlin, Germany'),
+(4, 'Vintage Books', 'Toronto, Canada'),
+(5, 'Oxford University Press', 'Oxford, UK'),
+(6, 'Simon & Schuster', 'New York, USA'),
+(7, 'Bloomsbury', 'London, UK'),
+(8, 'Macmillan Publishers', 'London, UK'),
+(9, 'Hachette Livre', 'Paris, France'),
+(10, 'Scholastic', 'New York, USA');
+
+INSERT INTO Books (book_id, title, isbn, publication_year, publisher_id)
+VALUES
+(1, '1984', '9780451524935', 1949, 1),
+(2, 'Pride and Prejudice', '9780141439518', 1813, 1),
+(3, 'Adventures of Huckleberry Finn', '9780143107323', 1884, 2),
+(4, 'Kafka on the Shore', '9781400079278', 2002, 3),
+(5, 'Harry Potter and the Sorcerer''s Stone', '9780747532743', 1997, 7),
+(6, 'Murder on the Orient Express', '9780062693662', 1934, 2),
+(7, 'The Old Man and the Sea', '9780684801223', 1952, 6),
+(8, 'The Great Gatsby', '9780743273465', 1925, 3),
+(9, 'War and Peace', '9780199232765', 1869, 5),
+(10, 'One Hundred Years of Solitude', '9780060883287', 1967, 9);
+
+INSERT INTO BookAuthors (author_id, book_id)
+VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 6),
+(7, 7),
+(8, 8),
+(9, 9),
+(10, 10);
+
+INSERT INTO BookGenres (book_id, genre_id)
+VALUES
+(1, 1),
+(2, 6),
+(3, 7),
+(4, 1),
+(5, 3),
+(6, 2),
+(7, 8),
+(8, 9),
+(9, 4),
+(10, 1);
