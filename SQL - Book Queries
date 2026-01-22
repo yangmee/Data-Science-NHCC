@@ -1,0 +1,32 @@
+--Find books with the fiction genre
+
+SELECT
+b.title,
+b.publication_year,
+g.genre_name
+FROM
+Books AS b
+JOIN
+BookGenres AS bg ON b.book_id = bg.book_id
+JOIN
+Genres AS g ON bg.genre_id = g.genre_id
+WHERE
+g.genre_name = 'Fiction';
+
+--List books from the 20th century (1900s)
+SELECT
+title AS book_title,
+publication_year,
+isbn
+FROM
+Books
+WHERE
+publication_year BETWEEN 1900 AND 1999
+ORDER BY
+publication_year ASC;
+
+--Find the average publication year of all books
+SELECT
+AVG(publication_year) AS average_publication_year
+FROM
+Books;
