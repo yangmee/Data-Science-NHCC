@@ -1,0 +1,48 @@
+TRAINER (
+  trainer_id INT PRIMARY KEY,
+  first_name VARCAHR,
+  last_name VARCHAR,
+  birthplace VARCHAR,
+  training_style VARCHAR
+)
+
+DOG (
+  dog_id INT PRIMARY KEY,
+  name VARCHAR,
+  birth_year YEAR,
+  trainer_id INT,
+  type_name VARCHAR,
+  price DECIMAL (10, 2)
+  FOREIGN KEY (trainer_id) REFERENCES TRAINER(trainer_id),
+  FOREIGN KEY (type_name) REFERENCES DOG_TYPE(type_name),
+  FOREIGN KEY (price) references DOG_TYPE(price)
+)
+
+DOG_TYPE (
+  type_name VARCHAR PRIMARY KEY,
+  description VARCHAR
+  price DECIMAL (10, 2)
+)
+
+DOG_GROUP (
+  group_id INT PRIMARY KEY,
+  group_name VARCHAR,
+  description VARCHAR
+)
+
+CUSTOMER (
+  customer_id INT PRIMARY KEY,
+  first_name VARCHAR,
+  last_name VARCHAR,
+  address VARCHAR,
+  birth_date DATE,
+  monthly_income DECIMAL(10,2)
+)
+
+CUSTOMER_DOG_PREFERENCE (
+  preference_id INT PRIMARY KEY,
+  customer_id INT,
+  type_name VARCHAR,
+  FOREIGN KEY (customer_id) REFERENCES CUSTOMER(customer_id),
+  FOREIGN KEY (type_name) REFERENCES DOG_TYPE(type_name)
+)
