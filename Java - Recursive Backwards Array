@@ -1,0 +1,17 @@
+public class ArrayReverseDisplay {
+	public static <T> void displayBackward(T[] arr) {
+if (arr == null) {
+return;
+}
+displayBackwardRecursive (arr, arr.length -1);
+	}
+
+	private static <T> void displayBackwardRecursive(T[] arr, int currentIndex){
+		if (currentIndex <0) {
+			return;
+		} else {
+			System.out.pringln(arr[currentIndex]);
+			displayBackwardRecurzive(arr, currentIndex – 1);
+		}
+	}
+}
