@@ -1,0 +1,48 @@
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+public class CalculatorTest {
+    @Test
+    public void testAdd() {
+        // Arrange
+        Calculator calc = new Calculator();
+        // Act
+        int result = calc.add(2, 3);
+        // Assert
+        assertTrue(5 == result);
+    }
+
+    // Test Subtract
+    @Test
+    public void testSubtract() {
+        //Arrange
+        Calculator calc = new Calculator();
+        // Act
+        int result = calc.subtract(3, 2);
+        // Assert
+        assert(1 == result);
+    }
+
+    // Test Multiply
+    @Test
+    public void testMultiply() {
+        //Arrange
+        Calculator calc = new Calculator();
+        // Act
+        int result = calc.multiply(2, 3);
+        // Assert
+        assert(6 == result);
+    }
+
+    // Test Divide
+    @Test
+    public void testDivide() {
+        //Arrange
+        Calculator calc = new Calculator();
+        // Act
+        double result = (double) calc.divide(6,3);
+        // Assert
+        assert (2 == result);
+    }
+}
